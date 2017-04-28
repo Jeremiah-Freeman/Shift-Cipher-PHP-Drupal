@@ -21,7 +21,7 @@ function cipher_menu() {
 function shift_cipher_form() {
     $form = [];
     $form['shifting_value'] = [
-        '#title' => 'Shifting Value',
+        '#title' => 'Shifting Value.',
         '#description' => t('( please input a number, this number will be the distance of moves to an encrypted letter )'),
         '#type' => 'textfield',
         '#required' => TRUE,
@@ -36,7 +36,7 @@ function shift_cipher_form() {
         '#element_validate' => ['element_validate_left_right'],
     ];
 // word to encrypt //
-    $form['word'] = [
+    $form['word_sentense'] = [
         '#title' => 'Enter a word or sentence.',
         '#description' => t('( this sentence will be encrypted according to your parameters )'),
         '#type' => 'textfield',
@@ -49,4 +49,44 @@ function shift_cipher_form() {
         '#value' => 'ENCRYPT',
     ];
     return $form;
+}
+// form submission //
+function shifty_cipher_form_submit($form, &$form_state) {
+
+    $shifter_value = $form_state['values']['shifter_value'];
+    $direction = $form_state['values']['direction'];
+    $word_sentense = $form_state['values']['word_sentense'];
+    $word_sentense = str_split(strtolower($form_state['values']['word_sentense']));
+    $_SESSION['user_input'] = 'word_sentense';
+
+    $result = [];
+    $alpha = [
+        'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3, 'e' => 4, 'f' => 5, 'g' => 6, 'h' => 7, 'i' => 8, 'j' => 9, 'k' => 10, 'l' => 11, 'm' => 12, 'n' => 13, 'o' => 14, 'p' => 15, 'q' => 16, 'r' => 17, 's' => 18, 't' => 19,    'u' => 20, 'v' => 21, 'w' => 22, 'x' => 23, 'y' => 24, 'z' => 25
+    ];
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ]
+
 }
