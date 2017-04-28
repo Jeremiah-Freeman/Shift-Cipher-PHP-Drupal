@@ -43,6 +43,10 @@ function shift_cipher_form() {
         '#required' => TRUE,
         '#element_validate' => ['element_validate_unique_characters'],
     ];
-    
+
+    $form['submit'] = [
+        '#type' => 'submit',
+        '#value' => 'ENCRYPT',
+    ];
     return $form;
 }
