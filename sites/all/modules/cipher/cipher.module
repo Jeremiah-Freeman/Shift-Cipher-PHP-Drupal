@@ -22,7 +22,7 @@ function shift_cipher_form() {
     $form = [];
     $form['shifting_value'] = [
         '#title' => 'Shifting Value',
-        '#description' => t('please input a number, this number will be the distance of moves to an encrypted letter'),
+        '#description' => t('( please input a number, this number will be the distance of moves to an encrypted letter )'),
         '#type' => 'textfield',
         '#required' => TRUE,
         '#element_validate' => ['element_validate_integer_positive'],
@@ -30,10 +30,19 @@ function shift_cipher_form() {
 // shifter direction (left - right) //
     $form['direction'] = [
         '#title' => 'Encrypt in what direction?',
-        '#description' => t('please choose a ( left ) or ( right ) direction to encrypt too '),
+        '#description' => t('( please choose a ( left ) or ( right ) direction to encrypt too )'),
         '#type' => 'textfield',
-        '#required' => 'TRUE',
+        '#required' => TRUE,
         '#element_validate' => ['element_validate_left_right'],
     ];
+// word to encrypt //
+    $form['word'] = [
+        '#title' => 'Enter a word or sentence.',
+        '#description' => t('( this sentence will be encrypted according to your parameters )'),
+        '#type' => 'textfield',
+        '#required' => TRUE,
+        '#element_validate' => ['element_validate_unique_characters'],
+    ];
+    
     return $form;
 }
