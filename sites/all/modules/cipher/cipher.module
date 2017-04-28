@@ -2,7 +2,7 @@
 function cipher_menu() {
     $items = [];
     $items['shift_cipher'] = [
-            'title' => 'Shifter Cipher',
+            'title' => 'A Shifty Cipher',
             'type' => MENU_NORMAL_ITEM,
             'access callback' => TRUE,
             'page callback' => 'drupal_get_form',
@@ -16,9 +16,8 @@ function cipher_menu() {
             ];
         return $items;
     }
-        
-// shifter number //
 
+// shifter number //
 function shift_cipher_form() {
     $form = [];
     $form['shifting_value'] = [
@@ -27,6 +26,14 @@ function shift_cipher_form() {
         '#type' => 'textfield',
         '#required' => TRUE,
         '#element_validate' => ['element_validate_integer_positive'],
+    ];
+// shifter direction (left - right) //
+    $form['direction'] = [
+        '#title' => 'Encrypt in what direction?',
+        '#description' => t('please choose a ( left ) or ( right ) direction to encrypt too '),
+        '#type' => 'textfield',
+        '#required' => 'TRUE',
+        '#element_validate' => ['element_validate_left_right'],
     ];
     return $form;
 }
