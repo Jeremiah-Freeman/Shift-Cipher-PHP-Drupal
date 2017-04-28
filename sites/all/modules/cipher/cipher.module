@@ -1,18 +1,32 @@
 <?php
 function cipher_menu() {
-    $items = array();
-    $items['shift_cipher'] = array(
-            'title' => 'Shift Cipher',
+    $items = [];
+    $items['shift_cipher'] = [
+            'title' => 'Shifter Cipher',
             'type' => MENU_NORMAL_ITEM,
             'access callback' => TRUE,
             'page callback' => 'drupal_get_form',
-            'page arguments' => array('shift_cipher_form'),
-        );
-        $items['shift_cipher_success_page'] = array(
-                'title' => 'Shift Cipher Results',
-                'type' => MENU_CALLBACK,
-                'access callback' => TRUE,
-                'page callback' => 'display_cipher_results',
-            );
+            'page arguments' => ['shift_cipher_form'],
+        ];
+        $items['shift_cipher_success_page'] =[
+            'title' => 'Shift Cipher Results',
+            'type' => MENU_CALLBACK,
+            'access callback' => TRUE,
+            'page callback' => 'display_cipher_results',
+            ];
         return $items;
     }
+        
+// shifter number //
+
+function shift_cipher_form() {
+    $form = [];
+    $form['shifting_value'] = [
+        '#title' => 'Shifting Value',
+        '#description' => t('please input a number, this number will be the distance of moves to an encrypted letter'),
+        '#type' => 'textfield',
+        '#required' => TRUE,
+        '#element_validate' => ['element_validate_integer_positive'],
+    ];
+    return $form;
+}
