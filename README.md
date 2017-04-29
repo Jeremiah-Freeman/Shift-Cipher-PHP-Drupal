@@ -8,6 +8,7 @@
 
 ### Setup:
     *
+    - Clone repo from Github ( https://github.com/jaythinkshappiness/Shift-Cipher-PHP-Drupal )
     - Download php
     - Download drupal 7
     - Download mysql
