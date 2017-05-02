@@ -56,15 +56,54 @@ function shifty_cipher_form_submit($form, &$form_state) {
     $shifter_value = $form_state['values']['shifter_value'];
     $direction = $form_state['values']['direction'];
     $word_sentence = $form_state['values']['word_sentence'];
-    $word_sentence = str_split(strtolower($form_state['values']['word_sentence']));
     $_SESSION['user_input'] = 'word_sentence';
+    $word_sentence = str_split(strtolower($form_state['values']['word_sentence']));
 
     $result = [];
     $alpha = [
         'a' => 0, 'b' => 1, 'c' => 2, 'd' => 3, 'e' => 4, 'f' => 5, 'g' => 6, 'h' => 7, 'i' => 8, 'j' => 9, 'k' => 10, 'l' => 11, 'm' => 12, 'n' => 13, 'o' => 14, 'p' => 15, 'q' => 16, 'r' => 17, 's' => 18, 't' => 19,    'u' => 20, 'v' => 21, 'w' => 22, 'x' => 23, 'y' => 24, 'z' => 25
     ];
-}
 
+    foreach ($word_sentence as $input) {
+        if ((preg_match("/[a-zA-Z]/", $input))) {
+
+            $input = $alpha[$input];
+
+            if ($direction == 'left') {
+                $the_move = ($input - $shifting_value) % 26;
+                if ($the_move < 0) {
+                    $the_move = $the_move + 26;
+                }
+            } elseif ($direction == 'right') {
+                $the_move = ($input + $shifting_value) % 26;
+                if ($the_move > 26) {
+                    $the_move = $the_move - 26;
+                }
+            }
+            foreach ($alpha as $key => $value) {
+                if ($the_move == $value) {
+                    $the_move = $key;
+                }
+            }
+            array_push($result, $the_move);
+        }else {
+            array_push($result, $input);
+        }
+    }
+
+    $_SESSION['cipher_result'] = $result;
+    $form_state['redirect'] = 'shift_cipher_success_page';
+}
+var_dump($_SESSION['cipher_result']);
+
+
+function display_cipher_results() {
+    $result = $_SESSION['cipher_result'];
+    $result = implode("", $result);
+    $word_sentence = $_SESSION['user_input'];
+    $result = "Encryption was successful: <h2>$word_sentence</h2> has been encrypted to: <h2> $result</h2>";
+    return $result;
+}
 
 function element_validate_left_right($element) {
     if (($element['#value'] != 'right') && ($element['#value'] != 'left')) {
